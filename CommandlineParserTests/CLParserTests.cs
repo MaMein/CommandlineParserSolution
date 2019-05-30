@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using CommandlineParser;
 using CommandlineParser.Arguments;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -14,8 +15,15 @@ namespace CommandlineParserTests
             CLParser TheParser = new CLParser();
             Assert.AreEqual(Environment.CommandLine, TheParser.Commandline);
         }
-       
-   
+        [TestMethod]
+        public void Create_CLParser_with_Custom_Commandline()
+        {
+            String[] InitArgs = new string[] { "-Autorun", "-Folder", "C:\\Files\\Custom with Blank\\", "-Arg4" };
+            String[] ExpectedArgs = new string[] { "-Autorun", "-Folder", "C:\\Files\\Custom with Blank\\", "-Arg4" };
+
+            CLParser TheParser = new CLParser(InitArgs);
+            CollectionAssert.AreEqual(ExpectedArgs, TheParser.RawCommandlineArguments);
+        }
         [TestMethod]
         public void AddArgument_To_CLParser_Is_One_In_its_ArgumentsList()
         {
@@ -26,33 +34,8 @@ namespace CommandlineParserTests
             Assert.AreEqual(1, TheParser.ArgumentsCount);
         }
 
-        /// <summary>
-        /// PreRequesits : CommandlineArguments needs to be : 
-        /// -Autorun -Filterfiles "C:\Spiele\*.cfg" -Arg3 -Arg4 "Sentence with Blanks"
-        /// </summary>
-        [TestMethod]
-        public void getCommandlineArgs_From_Application_issame()
-        {
-            CLParser TheParser = new CLParser();
-
-            string[] CommandLineArgs = TheParser.GetCommandlineArgs();
-            string[] ExpectedArgs = new string[]{"-Autorun",
-                                    "-Filterfiles",
-                                    "C:\\Spiele\\*.cfg\\",
-                                    "-Arg3",
-                                    "-Arg4",
-                                    "Sentence with Blanks" };
-
-
-            Assert.AreEqual(ExpectedArgs[1], CommandLineArgs[1]);
-            Assert.AreEqual(ExpectedArgs[2], CommandLineArgs[2]);
-            Assert.AreEqual(ExpectedArgs[3], CommandLineArgs[3]);
-            Assert.AreEqual(ExpectedArgs[4], CommandLineArgs[4]);
-            Assert.AreEqual(ExpectedArgs[5], CommandLineArgs[5]);
-            Assert.AreEqual(ExpectedArgs[6], CommandLineArgs[6]);
-
-
-        }
+    
+        
 
 
 
