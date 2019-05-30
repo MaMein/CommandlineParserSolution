@@ -60,25 +60,8 @@ namespace CommandlineParserTests
         //
         #endregion
 
-        [TestMethod]
-        public void Create_CLParser()
-        {
-            CLParser TheParser = new CLParser();
-        }
+      
 
-        [TestMethod]
-        public void AddArgument_To_CLParser_Is_One_In_its_ArgumentsList()
-        {
-            CLParser TheParser = new CLParser();
-            CLArgumentBoolean TheboolArg= new CLArgumentBoolean("AutorunSwitch","Autorun","If True, the Programm starts automatic",true);
-
-            TheParser.AddArgument(TheboolArg);
-            Assert.AreEqual(1, TheParser.ArgumentsCount);
-
-
-
-
-        }
 
 
     }
