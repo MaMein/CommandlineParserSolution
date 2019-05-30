@@ -11,7 +11,7 @@ namespace CommandlineParserTests
         {
             CommadlineParser.Class1 TheObj = new CommadlineParser.Class1();
             TheObj.FirstMethod();
-            Assert.Fail();
+            Assert.Fail(); 
         }
     }
 }
