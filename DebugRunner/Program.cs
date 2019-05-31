@@ -1,4 +1,5 @@
-﻿using CommandlineParser;
+﻿using CommandlineParser.Arguments;
+using CommandlineParser.Parser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,9 @@ namespace DebugRunner
             Console.WriteLine("");
 
             Console.WriteLine("Parser Commandline Arguments:");
-            CLParser TheParser = new CLParser();
-            Console.WriteLine(String.Join(";", TheParser.GetEnvironmentCommandlineArgs()));
+            var TheParser = new CLParser(Environment.GetCommandLineArgs());
+            
+            Console.WriteLine(String.Join(";", TheParser.CommandlineArgs));
             Console.WriteLine("");
 
             Console.WriteLine("[Enter] zum schliessen...");

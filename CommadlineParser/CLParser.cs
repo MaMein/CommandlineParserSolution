@@ -4,40 +4,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommandlineParser.Arguments;
+using CommandlineParser.Parser;
 
-namespace CommandlineParser
+namespace CommandlineParser.Parser
 {
-    public class CLParser
+    public class CLParser: ICLParser
     {
 
-        List<CLArgument> _Arguments = new List<CLArgument>();
-        private readonly string _RawCommandline;
-        private readonly string[] _RawCommandlineArguments;
+        Dictionary<string,IArgument> _Arguments = new Dictionary<string,IArgument>();
+        private readonly string _Commandline;
+        private readonly string[] _CommandlineArgs;
+
+        #region ICLParser Members
 
         public int ArgumentsCount { get { return this._Arguments.Count; } }
-        public string Commandline { get { return _RawCommandline; } }
-        public string[] RawCommandlineArguments { get { return _RawCommandlineArguments; } }
+        public string Commandline { get { return _Commandline; } }
+        public string[] CommandlineArgs { get { return _CommandlineArgs; } }
 
-        public CLParser()
+        public void AddArgument(IArgument CLArg)
         {
-            _RawCommandline = Environment.CommandLine;
-            _RawCommandlineArguments = Environment.GetCommandLineArgs();
-        }
-        public CLParser(String[] CommandlineArguments)
-        {
-            _RawCommandline = String.Join(" ", CommandlineArguments);
-            _RawCommandlineArguments = CommandlineArguments;
-        }
-        
-
-        public void AddArgument(CLArgument theArg)
-        {
-            this._Arguments.Add(theArg);
+            this._Arguments.Add(CLArg.Name, CLArg);
         }
 
-        public string[] GetEnvironmentCommandlineArgs()
+        #endregion
+
+
+
+        public CLParser(String[] CommandlineArgs)
         {
-            return Environment.GetCommandLineArgs();
+            _Commandline = String.Join(" ", CommandlineArgs);
+            _CommandlineArgs = CommandlineArgs;
+        }
+
+        public IArgument GetArgument(string argumentName)
+        {
+            return _Arguments[argumentName];
         }
     }
 }

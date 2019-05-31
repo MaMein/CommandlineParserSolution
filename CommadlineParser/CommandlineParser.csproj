@@ -7,8 +7,8 @@
     <ProjectGuid>{BD310828-423C-41A8-99A0-D4A2B28ACAE3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommadlineParser</RootNamespace>
-    <AssemblyName>CommadlineParser</AssemblyName>
+    <RootNamespace>CommandlineParser</RootNamespace>
+    <AssemblyName>CommandlineParser</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,9 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CLArgument.cs" />
-    <Compile Include="CLArgumentBoolean.cs" />
+    <Compile Include="ArgumentValueBoolean.cs" />
+    <Compile Include="IArgumentValueInteger.cs" />
+    <Compile Include="IArgumentValueList.cs" />
+    <Compile Include="IArgumentValueString.cs" />
+    <Compile Include="IArgumentValueBoolean.cs" />
     <Compile Include="CLParser.cs" />
+    <Compile Include="IArgument.cs" />
+    <Compile Include="ICLParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
